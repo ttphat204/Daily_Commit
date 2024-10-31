@@ -22,5 +22,5 @@ jobs:
 
       - name: Push changes
         run: |
-          git pull --rebase origin main || echo "No changes to pull"  # Đồng bộ với remote
+          git pull --rebase origin main || echo "No changes to pull"  # Đồng bộ hóa với remote
           git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/ttphat204/Daily_Commit.git main || echo "Push failed"
