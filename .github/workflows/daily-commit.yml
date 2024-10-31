@@ -3,6 +3,9 @@ name: Daily Commit
 on:
   schedule:
     - cron: '0 0 * * *'  # Chạy vào lúc 00:00 UTC mỗi ngày
+  push:  # Kích hoạt khi có push
+    branches:
+      - main  # Chỉ định nhánh mà bạn muốn theo dõi
 
 jobs:
   daily-commit:
@@ -22,4 +25,3 @@ jobs:
       - name: Push changes
         run: |
           git push
-
