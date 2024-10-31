@@ -2,28 +2,29 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Thực hiện vào lúc 00:00 UTC mỗi ngày
+    - cron: '0 0 * * *'  # Chạy vào lúc 00:00 UTC mỗi ngày
+  push:
+    branches:
+      - main
 
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-      
-      - name: Sync with remote
-        run: |
-          git pull --rebase origin main || echo "No changes to pull"
+        uses: actions/checkout@v3  # Đảm bảo đang sử dụng phiên bản mới
+
+      - name: Create dummy.txt
+        run: echo "This is a dummy file" > dummy.txt  # Tạo tệp dummy.txt nếu chưa tồn tại
 
       - name: Make a dummy commit
         run: |
-          echo "This is a dummy file" > dummy.txt
-          echo "$(TZ='Asia/Ho_Chi_Minh' date) - Commit on $(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)" >> dummy.txt
+          echo "$(date) - Commit on $(date +%Y-%m-%d)" >> dummy.txt  # Thêm ngày giờ vào dummy.txt
           git config --global user.email "trantanphat08012004@gmail.com"
           git config --global user.name "BeckPac"
           git add dummy.txt
-          git commit -m "Daily commit" || echo "No changes to commit"
+          git commit -m "Daily commit" || echo "No changes to commit"  # Bỏ qua nếu không có thay đổi
 
       - name: Push changes
         run: |
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/ttphat204/Daily_Commit.git main || echo "Push failed"
+          git push origin main || echo "Push failed"  # Bỏ qua nếu push không thành công
