@@ -16,11 +16,11 @@ jobs:
 
       - name: Make a dummy commit
         run: |
-          echo "$(date) - $(date +%Y-%m-%d)" >> dummy.txt  # Thêm thông tin vào dummy.txt
+          echo "$(date)" >> dummy.txt  # Thêm ngày hiện tại vào dummy.txt
           git config --global user.email "trantanphat08012004@gmail.com"
           git config --global user.name "BeckPac"
           git add dummy.txt
-          git commit -m "Daily commit"
+          git commit -m "Daily commit" || echo "No changes to commit"  # Bỏ qua nếu không có thay đổi
 
       - name: Push changes
         run: |
