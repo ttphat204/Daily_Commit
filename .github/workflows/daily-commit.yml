@@ -12,19 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Đảm bảo đang sử dụng phiên bản mới
-
+        uses: actions/checkout@v3
+      
       - name: Create dummy.txt
-        run: echo "This is a dummy file" > dummy.txt  # Tạo tệp dummy.txt nếu chưa tồn tại
+        run: echo "This is a dummy file" > dummy.txt
 
       - name: Make a dummy commit
         run: |
-          echo "$(date) - Commit on $(date +%Y-%m-%d)" >> dummy.txt  # Thêm ngày giờ vào dummy.txt
+          echo "$(TZ='Asia/Ho_Chi_Minh' date) - Commit on $(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)" >> dummy.txt
           git config --global user.email "trantanphat08012004@gmail.com"
           git config --global user.name "BeckPac"
           git add dummy.txt
-          git commit -m "Daily commit" || echo "No changes to commit"  # Bỏ qua nếu không có thay đổi
+          git commit -m "Daily commit" || echo "No changes to commit"
 
       - name: Push changes
         run: |
-          git push origin main || echo "Push failed"  # Bỏ qua nếu push không thành công
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/ttphat204/Daily_Commit.git main || echo "Push failed"
