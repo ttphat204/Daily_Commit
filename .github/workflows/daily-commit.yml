@@ -13,12 +13,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
-      - name: Create dummy.txt
-        run: echo "This is a dummy file" > dummy.txt
+        
+      - name: Sync with remote
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Make a dummy commit
         run: |
+          echo "This is a dummy file" > dummy.txt
           echo "$(TZ='Asia/Ho_Chi_Minh' date) - Commit on $(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)" >> dummy.txt
           git config --global user.email "trantanphat08012004@gmail.com"
           git config --global user.name "BeckPac"
