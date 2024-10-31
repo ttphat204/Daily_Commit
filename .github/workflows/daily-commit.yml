@@ -11,6 +11,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       
+      - name: Sync with remote
+        run: |
+          git pull --rebase origin main || echo "No changes to pull"
+
       - name: Make a dummy commit
         run: |
           echo "This is a dummy file" > dummy.txt  # Tạo tệp dummy.txt nếu chưa tồn tại
@@ -22,5 +26,4 @@ jobs:
 
       - name: Push changes
         run: |
-          git pull --rebase origin main || echo "No changes to pull"  # Đồng bộ hóa với remote
           git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/ttphat204/Daily_Commit.git main || echo "Push failed"
