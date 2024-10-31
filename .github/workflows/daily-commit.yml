@@ -22,4 +22,5 @@ jobs:
 
       - name: Push changes
         run: |
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/ttphat204/Daily_Commit.git main
+          git pull origin main || echo "No changes to pull"  # Cố gắng lấy các thay đổi từ remote
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/ttphat204/Daily_Commit.git main || echo "Push failed"
