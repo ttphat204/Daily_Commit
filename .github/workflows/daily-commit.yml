@@ -5,7 +5,7 @@ name: Daily Commit
 #     - cron: '0 0 * * *'  # Chạy vào lúc 00:00 UTC mỗi ngày
 on:
   schedule:
-    - cron: '30 17 * * *'  # Chạy vào lúc 17:30 UTC mỗi ngày (0:30 giờ Việt Nam)
+    - cron: '45 0 * * *'  # Chạy vào lúc 00:45 UTC mỗi ngày
 
   push:
     branches:
