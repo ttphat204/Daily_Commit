@@ -1,11 +1,8 @@
 name: Daily Commit
 
-# on:
-#   schedule:
-#     - cron: '0 0 * * *'  # Chạy vào lúc 00:00 UTC mỗi ngày
 on:
   schedule:
-    - cron: '47 0 * * *'  # Chạy vào lúc 00:47 UTC mỗi ngày
+    - cron: '0 0 * * *'  # Chạy vào lúc 00:00 UTC mỗi ngày
 
   push:
     branches:
